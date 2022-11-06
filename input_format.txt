@@ -1,0 +1,21 @@
+% Berth length (S), Total time (T)
+% Number of breaks points (K)
+- K lines contains - b[k] (real)
+% Number of vessels (N)
+- N lines contains 4 or 5 Number
+> Vessel index (start from 1), size, arrival time, processing time, weight (=1 as default)
+
+-- Break by a space
+
+40 4000
+2
+20
+32
+7
+1 10 10 10
+2 15 5 9 2
+3 6 0 5
+4 20 2 10 3
+5 5 15 5
+6 15 12 8
+7 7 8 10 3
