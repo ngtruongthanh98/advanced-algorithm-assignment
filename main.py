@@ -1,7 +1,7 @@
 # !python3 main.py < input.txt > output.txt
 # MIP (Mixed Integer Programming) problem
 from ortools.linear_solver import pywraplp
-from berth import Vessel
+from vessel import Vessel
 
 import sys
 
@@ -120,13 +120,13 @@ for i in range(N):
 			# constraint.SetCoefficient(s[i], 1)
 			constraint.SetCoefficient(delta[i][j], S)
 		
-			constraint = solver.RowConstraint(0, 1, f'Sigma overlap of {i} and {j}')
-			constraint.SetCoefficient(sigma[i][j], 1)
-			constraint.SetCoefficient(sigma[j][i], 1)
+			# constraint = solver.RowConstraint(0, 1, f'Sigma overlap of {i} and {j}')
+			# constraint.SetCoefficient(sigma[i][j], 1)
+			# constraint.SetCoefficient(sigma[j][i], 1)
 
-			constraint = solver.RowConstraint(0, 1, f'Delta overlap of {i} and {j}')
-			constraint.SetCoefficient(delta[i][j], 1)
-			constraint.SetCoefficient(delta[j][i], 1)
+			# constraint = solver.RowConstraint(0, 1, f'Delta overlap of {i} and {j}')
+			# constraint.SetCoefficient(delta[i][j], 1)
+			# constraint.SetCoefficient(delta[j][i], 1)
 
 			constraint = solver.RowConstraint(1, 2, f'Sigma and Delta overlap of {i} and {j}')
 			constraint.SetCoefficient(sigma[i][j], 1)
