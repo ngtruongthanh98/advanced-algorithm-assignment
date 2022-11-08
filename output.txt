@@ -2,7 +2,7 @@
 ********** Input parameters ********
 ************************************
 Berth length:  40
-Total time:  50.0
+Total time:  40.0
 Number of breaks:  2
 Break  0 :  0
 Break  1 :  20
@@ -77,11 +77,11 @@ Model: Min loss
 ************************************
 **** Result of optimal solution ****
 ************************************
-Objective value = 22.999999999999957
+Objective value = 23.0
 **** Time ****
-10.0 12.0 0 1.9999999999999847 15.0 21.0 8.0 
+10.0 12.0 0 2.0 15.0 21.0 8.0 
 **** Berth ****
-20.0 5.0 26.0 0 0 5.0 32.0 
+22.0 5.0 32.0 0 0 0 32.0 
 **** Process ****
 10.0 9.0 5.0 10.0 5.0 8.0 10.0 
 **** Vessel infomation ****
@@ -95,8 +95,8 @@ Vessel: 1
 	*** Decision variables ***
 	Start time: 10.0
 	End time: 20.0
-	Start berth: 20.0
-	End berth: 30.0
+	Start berth: 22.0
+	End berth: 32.0
 
 Vessel: 2
 	*** Information variables ***
@@ -121,8 +121,8 @@ Vessel: 3
 	*** Decision variables ***
 	Start time: 0
 	End time: 5.0
-	Start berth: 26.0
-	End berth: 32.0
+	Start berth: 32.0
+	End berth: 38.0
 
 Vessel: 4
 	*** Information variables ***
@@ -132,8 +132,8 @@ Vessel: 4
 	Weight (Priority): 3
 
 	*** Decision variables ***
-	Start time: 1.9999999999999847
-	End time: 11.999999999999984
+	Start time: 2.0
+	End time: 12.0
 	Start berth: 0
 	End berth: 20.0
 
@@ -160,8 +160,8 @@ Vessel: 6
 	*** Decision variables ***
 	Start time: 21.0
 	End time: 29.0
-	Start berth: 5.0
-	End berth: 20.0
+	Start berth: 0
+	End berth: 15.0
 
 Vessel: 7
 	*** Information variables ***

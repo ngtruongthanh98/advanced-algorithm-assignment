@@ -52,6 +52,18 @@ for i in range(N):
 
 
 ### Validate input
+if not (S >= 0 and T >= 0 and K >= 0 and N >= 0):
+	print("Invalid input negative value")
+	exit(1)
+
+for i in range(K+2):
+	if not (b[i] >= 0 and b[i] <= S):
+		print("Invalid input breaks")
+		exit(1)
+
+if len(idx) != len(set(idx)):
+	print("Invalid vessel input duplicate")
+	exit(1)
 
 # Print input
 print("************************************")
