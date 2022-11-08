@@ -19,3 +19,30 @@
 5 5 15 5
 6 15 12 8
 7 7 8 10 3
+
+
+
+
+Compare solver: https://medium0.com/@chongjingting/4-ways-to-solve-linear-programming-in-python-b4af36b7894d
+Scipy (optimize.linprog) vs PuLP (pulp.LpProblem) vs CVXPY (cp.Problem) vs Gurobi - Gurobipy (Model) vs Pyomo (ConcreteModel) 
+vs PySCIPOpt (Model) vs Google OR-Tools (pywraplp.Solver) vs Gekko (GEKKO) vs Pyomo (ConcreteModel)  vs NAG (naginterfaces.library.opt)
+vs MIPLIB (mip)
+vs CVXOPT (cvxopt.solvers.lp)  vs SCIP Optimization Suite (scip.Model)
+https://www.supplychaindataanalytics.com/using-solvers-for-optimization-in-python/
+https://www.gurobi.com/resources/open-source-linear-and-mixed-integer-programming-software-and-solvers/
+vs COIN-OR vs ilp (old)
+
+
+
+
+Google OR-Tools: https://github.com/google/or-tools
+https://developers.google.com/optimization/introduction/python
+https://developers.google.com/optimization/
+https://google.github.io/or-tools/python/ortools/linear_solver/pywraplp.html
+!python -m pip install --upgrade --user -q ortools
+
+Import OR-Tools' wrapper for linear solvers
+https://mlabonne.github.io/blog/linearoptimization/
+
+
+

@@ -68,7 +68,6 @@ for i in range(N):
 
 # Support for {} not linked in, or the license was not found.
 solver = pywraplp.Solver.CreateSolver('SCIP')
-# solver = pywraplp.Solver('Maximize army power', pywraplp.Solver.GLOP_LINEAR_PROGRAMMING)
 if not solver:
 	exit (1)
 
@@ -82,7 +81,7 @@ gamma = [[None]*K]*N #1: v_i >= b_k
 
 num_vars = 3*N + 2*N**2 + N*K
 
-# Declare variables: 3*N + 2*N^2 + N*K
+# Declare variables:
 for i in range(N):
 	u[i] = solver.NumVar(0, infinity, 'u[%i]' % i)
 	v[i] = solver.NumVar(0, infinity, 'v[%i]' % i)
@@ -99,7 +98,6 @@ for i in range(N):
 objective = solver.Objective()
 for i in range(N):
 	objective.SetCoefficient(c[i], w[i])
-# objective.SetMaximization()
 objective.SetMinimization()
 
 
@@ -110,23 +108,21 @@ for i in range(N):
 			constraint = solver.RowConstraint(-p[i], T-p[i], f'Sigma of {i} and {j}')
 			constraint.SetCoefficient(u[i], 1)
 			constraint.SetCoefficient(u[j], -1)
-			# constraint.SetCoefficient(p[i], 1)
 			constraint.SetCoefficient(sigma[i][j], T)
 
 
 			constraint = solver.RowConstraint(-s[i], S-s[i], f'Delta of {i} and {j}')
 			constraint.SetCoefficient(v[i], 1)
 			constraint.SetCoefficient(v[j], -1)
-			# constraint.SetCoefficient(s[i], 1)
 			constraint.SetCoefficient(delta[i][j], S)
 		
-			# constraint = solver.RowConstraint(0, 1, f'Sigma overlap of {i} and {j}')
-			# constraint.SetCoefficient(sigma[i][j], 1)
-			# constraint.SetCoefficient(sigma[j][i], 1)
+			constraint = solver.RowConstraint(0, 1, f'Sigma overlap of {i} and {j}')
+			constraint.SetCoefficient(sigma[i][j], 1)
+			constraint.SetCoefficient(sigma[j][i], 1)
 
-			# constraint = solver.RowConstraint(0, 1, f'Delta overlap of {i} and {j}')
-			# constraint.SetCoefficient(delta[i][j], 1)
-			# constraint.SetCoefficient(delta[j][i], 1)
+			constraint = solver.RowConstraint(0, 1, f'Delta overlap of {i} and {j}')
+			constraint.SetCoefficient(delta[i][j], 1)
+			constraint.SetCoefficient(delta[j][i], 1)
 
 			constraint = solver.RowConstraint(1, 2, f'Sigma and Delta overlap of {i} and {j}')
 			constraint.SetCoefficient(sigma[i][j], 1)
@@ -137,7 +133,6 @@ for i in range(N):
 	constraint = solver.RowConstraint(p[i], p[i], f'Start, Process and End of {i}')
 	constraint.SetCoefficient(c[i], 1)
 	constraint.SetCoefficient(u[i], -1)
-	# constraint.Add(c[i] + u[i] == p[i])
 
 	constraint = solver.RowConstraint(a[i], T-p[i], f'Start time of vessel {i}')
 	constraint.SetCoefficient(u[i], 1)
@@ -147,23 +142,23 @@ for i in range(N):
 
 	
 	
-	# # if x in range b[k] and b[k+1] (x have v[i] and v[i] + s[i] in same range)
-	# # -S+b[k] <= x - S*gamma[i][k] <= b[k]
-	# # -S+b[k] <= v[i] - S*gamma[i][k] <= b[k]
-	# # -S+b[k] <= v[i] + s[i] - S*gamma[i][k] <= b[k]
-	# # =>  -S+b[k] <= v[i] - S*gamma[i][k] <= b[k] - s[i]
-	# for k in range(K):
-	# 	constraint = solver.RowConstraint(-S+b[k], b[k]-s[i], f'Gamma the range of start vessel {i} compare to break {k}')
-	# 	constraint.SetCoefficient(v[i], 1)
-	# 	constraint.SetCoefficient(gamma[i][k], -S)
+	# if x in range b[k] and b[k+1] (x have v[i] and v[i] + s[i] in same range)
+	# -S+b[k] <= x - S*gamma[i][k] <= b[k]
+	# -S+b[k] <= v[i] - S*gamma[i][k] <= b[k]
+	# -S+b[k] <= v[i] + s[i] - S*gamma[i][k] <= b[k]
+	# =>  -S+b[k] <= v[i] - S*gamma[i][k] <= b[k] - s[i]
+	for k in range(K):
+		constraint = solver.RowConstraint(-S+b[k], b[k]-s[i], f'Gamma the range of start vessel {i} compare to break {k}')
+		constraint.SetCoefficient(v[i], 1)
+		constraint.SetCoefficient(gamma[i][k], -S)
 
-	# 	# gamma[i] = 1 if v_i >= b_k
-	# 	# Sort array: b[i] >= b[i+1] (i = 0,1,...,K-2) 1->0
-	# 	# Gamma
-	# 	if k > 0:
-	# 		constraint = solver.RowConstraint(0, 1, f'Gamma relation of {k-1} and {k} in vessel {i}')
-	# 		constraint.SetCoefficient(gamma[i][k-1], 1)
-	# 		constraint.SetCoefficient(gamma[i][k], -1)
+		# gamma[i] = 1 if v_i >= b_k
+		# Sort array: b[i] >= b[i+1] (i = 0,1,...,K-2) 1->0
+		# Gamma
+		if k > 0:
+			constraint = solver.RowConstraint(0, 1, f'Gamma relation of {k-1} and {k} in vessel {i}')
+			constraint.SetCoefficient(gamma[i][k-1], 1)
+			constraint.SetCoefficient(gamma[i][k], -1)
 
 status = solver.Solve()
 

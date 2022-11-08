@@ -1,11 +1,14 @@
+************************************
+********** Input parameters ********
+************************************
 Berth length:  40
-Total time:  40.0
+Total time:  50.0
 Number of breaks:  2
 Break  0 :  0
 Break  1 :  20
 Break  2 :  32
 Break  3 :  40
-Number of vessels:  3
+Number of vessels:  7
 Vessel: 1
 	*** Information variables ***
 	Vessel size: 10.0
@@ -27,23 +30,61 @@ Vessel: 3
 	Processing time: 5.0
 	Weight (Priority): 1
 
+Vessel: 4
+	*** Information variables ***
+	Vessel size: 20.0
+	Arrival time: 2.0
+	Processing time: 10.0
+	Weight (Priority): 3
+
+Vessel: 5
+	*** Information variables ***
+	Vessel size: 5.0
+	Arrival time: 15.0
+	Processing time: 5.0
+	Weight (Priority): 1
+
+Vessel: 6
+	*** Information variables ***
+	Vessel size: 15.0
+	Arrival time: 12.0
+	Processing time: 8.0
+	Weight (Priority): 1
+
+Vessel: 7
+	*** Information variables ***
+	Vessel size: 7.0
+	Arrival time: 8.0
+	Processing time: 10.0
+	Weight (Priority): 3
+
+
+************************************
+******** Solver information ********
+************************************
 Model: Min loss
- - number of variables: 90
-   - binary=84, integer=6, continuous=0
- - number of constraints: 147
-   - linear=81, indicator=9, equiv=57
+ - number of variables: 266
+   - binary=252, integer=14, continuous=0
+ - number of constraints: 483
+   - linear=273, indicator=21, equiv=189
  - parameters: defaults
  - objective: minimize
  - problem type is: MILP
 
 
-objective = 0.0
+
+
+************************************
+**** Result of optimal solution ****
+************************************
+Objective value = 22.999999999999957
 **** Time ****
-10.0 5.0 0 
+10.0 12.0 0 1.9999999999999847 15.0 21.0 8.0 
 **** Berth ****
-20.0 0 0 
+20.0 5.0 26.0 0 0 5.0 32.0 
 **** Process ****
-10.0 9.0 5.0 
+10.0 9.0 5.0 10.0 5.0 8.0 10.0 
+**** Vessel infomation ****
 Vessel: 1
 	*** Information variables ***
 	Vessel size: 10.0
@@ -65,10 +106,10 @@ Vessel: 2
 	Weight (Priority): 2
 
 	*** Decision variables ***
-	Start time: 5.0
-	End time: 14.0
-	Start berth: 0
-	End berth: 15.0
+	Start time: 12.0
+	End time: 21.0
+	Start berth: 5.0
+	End berth: 20.0
 
 Vessel: 3
 	*** Information variables ***
@@ -80,11 +121,58 @@ Vessel: 3
 	*** Decision variables ***
 	Start time: 0
 	End time: 5.0
+	Start berth: 26.0
+	End berth: 32.0
+
+Vessel: 4
+	*** Information variables ***
+	Vessel size: 20.0
+	Arrival time: 2.0
+	Processing time: 10.0
+	Weight (Priority): 3
+
+	*** Decision variables ***
+	Start time: 1.9999999999999847
+	End time: 11.999999999999984
 	Start berth: 0
-	End berth: 6.0
+	End berth: 20.0
 
+Vessel: 5
+	*** Information variables ***
+	Vessel size: 5.0
+	Arrival time: 15.0
+	Processing time: 5.0
+	Weight (Priority): 1
 
-**** Gamma[i][k]: v[i]>=b[k] ****
-0 0 
-0 0 
-0 0 
+	*** Decision variables ***
+	Start time: 15.0
+	End time: 20.0
+	Start berth: 0
+	End berth: 5.0
+
+Vessel: 6
+	*** Information variables ***
+	Vessel size: 15.0
+	Arrival time: 12.0
+	Processing time: 8.0
+	Weight (Priority): 1
+
+	*** Decision variables ***
+	Start time: 21.0
+	End time: 29.0
+	Start berth: 5.0
+	End berth: 20.0
+
+Vessel: 7
+	*** Information variables ***
+	Vessel size: 7.0
+	Arrival time: 8.0
+	Processing time: 10.0
+	Weight (Priority): 3
+
+	*** Decision variables ***
+	Start time: 8.0
+	End time: 18.0
+	Start berth: 32.0
+	End berth: 39.0
+
