@@ -84,7 +84,8 @@ def generate_packing(sorted_df, log=True):
         "t_moore": [0 for _ in range(len(berth_breaks_list))],
         "t_finish": [TIME_HORIZON for _ in range(len(berth_breaks_list))],
         "p_start": [pos for pos in berth_breaks_list],
-        "p_end": [pos for pos in berth_breaks_list]
+        "p_end": [pos for pos in berth_breaks_list],
+        "t_wait": [0 for _ in berth_breaks_list],
     })
 
     # Take packing info and current vessel info
@@ -265,8 +266,7 @@ def generate_packing(sorted_df, log=True):
         for position in POSSIBLE:
             if len(packing.t_finish) == padding:
                 break
-            this_t_wait = (packing.t_finish[padding:] - packing.t_moore[padding:]).copy() + [
-                position.time - vessel.t_arrive]
+            this_t_wait = packing.t_wait[padding:].copy() + [position.time - vessel.t_arrive]
             waits.append(
                 sum(sorted_df.weight[:len(this_t_wait)] * np.array(this_t_wait)))
         min_pos = np.argmin(waits) if len(waits) else 0
@@ -284,7 +284,8 @@ def generate_packing(sorted_df, log=True):
             position.time,
             position.time + vessel.t_process,
             position.pos if position.cls[0] else position.pos - vessel.size_,
-            position.pos + vessel.size_ if position.cls[0] else position.pos
+            position.pos + vessel.size_ if position.cls[0] else position.pos,
+            position.time - vessel.t_arrive
         ]
 
         result = packing.tail(1)
