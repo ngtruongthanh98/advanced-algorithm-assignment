@@ -36,7 +36,7 @@ def gen_input(N: int, fileName = None):
   sumSizes = sum(sizes)
   maxSizes = max(sizes)
 
-  S = random.randint(10, int(sumSizes/2))
+  S = random.randint(maxSizes, int(sumSizes/2))
   T = 9999
   blocks = []
   bTemp = 0
