@@ -1,0 +1,9 @@
+Input 1
+Min wait time: 182
+Execution time: 0.5902688503265381Input 1
+Min wait time: 182
+Execution time: 1.0849273204803467Input 1
+Min wait time: 182
+Execution time: 0.6125991344451904Input 1
+Min wait time: 182
+Execution time: 0.677081823348999

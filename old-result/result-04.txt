@@ -1,0 +1,7 @@
+Input 4
+Min wait time: None
+Execution time: 0.042298316955566406Input 4
+Min wait time: None
+Execution time: 0.053000688552856445Input 4
+Min wait time: None
+Execution time: 0.039942026138305664
