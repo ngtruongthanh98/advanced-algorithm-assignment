@@ -1,0 +1,3 @@
+Input 21
+Min wait time: 4292
+Execution time: 18.360034227371216

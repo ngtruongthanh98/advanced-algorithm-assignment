@@ -1,0 +1,3 @@
+Input 6
+Min wait time: 1581
+Execution time: 1.5428667068481445
