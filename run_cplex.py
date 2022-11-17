@@ -1,34 +1,47 @@
-# 1910663
 from docplex.mp.model import Model
 from docplex.mp.progress import *
 from vessel import Vessel
-
+import time
 import sys
+import argparse
+import os
+ap = argparse.ArgumentParser()
+
+ap.add_argument("-of", "--output_fig",  type=str, default="",
+	help="export the solution to a figure")
+ap.add_argument("-in", "--input", type=str, default='input.txt',
+	help="input the params by a file")
+ap.add_argument("-ol", "--output_log", type=str, default='output.txt',
+	help="print the output logs into a file")
+
+args = vars(ap.parse_args())
 
 orig_stdout = sys.stdout
-f = open('output.txt', 'w')
-sys.stdout = f
+output_log = open(args["output_log"], 'w')
+sys.stdout = output_log
+
+input_file = open(args["input"], 'r')
 
 ##########################
 # Handle input parameters
 ##########################
 
-tmp = sys.stdin.readline().rstrip('\n').split(' ')
+tmp = input_file.readline().rstrip('\n').split(' ')
 S = int(tmp[0]) #Berth length
 T = float(tmp[1]) #Total time
-tmp = sys.stdin.readline().rstrip('\n')
+tmp = input_file.readline().rstrip('\n')
 K = int(tmp) #Number of breaks points
 b = [0] * K #Break point
 
 for i in range(K):
-	tmp = sys.stdin.readline().rstrip('\n')
+	tmp = input_file.readline().rstrip('\n')
 	b[i] = int(tmp)
 
 b.sort()
 b.insert(0,0)
 b.append(S)
 
-tmp = sys.stdin.readline().rstrip('\n')
+tmp = input_file.readline().rstrip('\n')
 N = int(tmp) #Number of vessels
 vessels = []
 w = [0] * N
@@ -38,7 +51,7 @@ p = [0] * N
 idx = [0] * N 
 
 for i in range(N):
-	tmp = sys.stdin.readline().rstrip('\n').split(' ')
+	tmp = input_file.readline().rstrip('\n').split(' ')
 	idx[i] = int(tmp[0])
 	s[i] = float(tmp[1])
 	a[i] = float(tmp[2])
@@ -132,40 +145,42 @@ print("\n\n\n")
 print("************************************")
 print("**** Result of optimal solution ****")
 print("************************************")
-try:
-	sol = solver.solve(log_output=False)
-	# solver.print_solution()
-	print("Objective value =",sol.get_objective_value())
-	print("**** Time ****")
-	for i in range(N):
-		print(u[i].solution_value, end=' ')
 
-	print("\n**** Berth ****")
-	for i in range(N):
-		print(v[i].solution_value, end=' ')
+tic = time.time()
+sol = solver.solve(log_output=False)
+toc = time.time()
+# solver.print_solution()
+print("Objective value =",sol.get_objective_value())
+print("Solving time: {:.12f}s".format((toc-tic)/1000) )
+print("**** Time ****")
+for i in range(N):
+	print(u[i].solution_value, end=' ')
 
-	print("\n**** Process ****")
-	for i in range(N):
-		print(p[i], end=' ')
+print("\n**** Berth ****")
+for i in range(N):
+	print(v[i].solution_value, end=' ')
 
-	print("\n**** Vessel infomation ****")
-	for i in range(N):
-		vessels[i].set_solution(
-			start_time = u[i].solution_value,
-			end_time = u[i].solution_value + p[i],
-			start_berth = v[i].solution_value,
-			end_berth = v[i].solution_value + s[i]
-		)
-		print(vessels[i])
-except:
-	print('\nThe problem does not have an optimal solution.')
+print("\n**** Process ****")
+for i in range(N):
+	print(p[i], end=' ')
+
+print("\n**** Vessel infomation ****")
+for i in range(N):
+	vessels[i].set_solution(
+		start_time = u[i].solution_value,
+		end_time = u[i].solution_value + p[i],
+		start_berth = v[i].solution_value,
+		end_berth = v[i].solution_value + s[i]
+	)
+	print(vessels[i])
+
 
 
 
 
 # Pipe redirect to output.txt
 sys.stdout = orig_stdout
-f.close()
+output_log.close()
 
 
 # Draw plot
@@ -214,4 +229,7 @@ arrow( left, 0, right -left, 0, length_includes_head = True, head_width = 0.55 )
 arrow( 0, low, 0, high-low, length_includes_head = True, head_width = 0.55 ) 
 
 # Show grid
-show()
+if args["output_fig"] == "":
+	show()
+else:
+	plt.savefig(args["output_fig"], dpi=300, bbox_inches='tight')

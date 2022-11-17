@@ -1,19 +1,36 @@
 # Advanced Algorithm Assignment
 
-## How to run:
+## How to run
 
 * Requirements
 ```
 pip install -r requirements.txt
 ```
 
-* Run
+* Run **cplex**
+To show all available options
 ```
-python3 run_cplex.py < input.txt
+python3 run_cplex.py -h
+python3 run_cplex_general.py -h # For more general running cplex
 ```
-The output file will export in output.txt
+Example command for running a single testcase by cplex
+```
+python3 run_cplex.py \
+    -in input.txt \
+    -ol output_log.txt \
+    -of output_fig.png 
+```
+Example command for running many testcases by cplex
+```
+python3 run_cplex_general.py \
+    -st 1 \
+    -et 60 \
+    -if input \
+    -olf cplex_result \
+    -off cplex_fig
+```
 
-* Run heuristic
+* Run **heuristic**
 
 To show all available options
 ```
@@ -33,3 +50,4 @@ python3 bap.py \
 ```
 
 Link report: https://www.overleaf.com/project/6358d9922a66754f5963bc56
+Link slide: https://www.overleaf.com/project/636bb3773357b950facf6227
