@@ -8,6 +8,7 @@ pip install -r requirements.txt
 ```
 
 * Run **cplex**
+
 To show all available options
 ```
 python3 run_cplex.py -h
