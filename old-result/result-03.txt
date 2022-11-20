@@ -1,7 +1,0 @@
-Input 3
-Min wait time: 149
-Execution time: 1.0224618911743164Input 3
-Min wait time: 149
-Execution time: 0.9447264671325684Input 3
-Min wait time: 149
-Execution time: 0.9430961608886719

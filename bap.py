@@ -11,10 +11,10 @@ import numpy as np
 import operator
 from dataclasses import dataclass
 import matplotlib.pyplot as plt
-from matplotlib import colors
 from time import time
 import math
 import argparse
+import os
 
 
 @dataclass()
@@ -73,6 +73,12 @@ if args.start_test is None:
 
 if args.end_test is None:
     args.end_test = args.start_test
+
+if args.log_res:
+    os.makedirs(args.res_dest, exist_ok=True)
+
+if args.log_fig:
+    os.makedirs(args.figs_dest, exist_ok=True)
 
 # Our input
 for test_idx in range(int(args.start_test), int(args.end_test) + 1):

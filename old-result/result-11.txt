@@ -1,3 +1,0 @@
-Input 11
-Min wait time: 4719
-Execution time: 3.6143012046813965
